@@ -1,11 +1,14 @@
-Cast | Inicio rápido
+Cast | Pronóstico de demanda
+Inicio rápido en Streamlit Community Cloud
 
-Windows: extrae todo el ZIP y haz doble clic en Iniciar_Cast.bat. Usa Python 3.11 o 3.12 y conexión a Internet durante la primera instalación. Mantén la ventana abierta mientras trabajas. Ctrl+C detiene la aplicación. Si el navegador no abre automáticamente, copia la dirección Local URL de la ventana.
+1. Descomprime Cast.zip. En tu repositorio existente actualiza app.py, motor.py y requirements.txt juntos. Mantén ejemplo_tickets.csv junto a app.py y .streamlit/config.toml en la raíz del repositorio.
+2. Guarda los cambios en la rama conectada a Streamlit Cloud. El archivo principal es app.py. Cast arranca con un ejemplo de tickets en Operaciones.
+3. Selecciona un departamento y abre Fuentes y conjuntos de datos. Sube un CSV o XLSX, elige la hoja si corresponde, indica las columnas de fecha y volumen y pulsa Importar conjunto. Para archivos con un ticket por fila usa Contar una unidad por fila.
+4. Abre Pipeline y calidad para consultar rechazos y descargar datos. En Modelos y pronósticos selecciona un horizonte de 7, 14, 30, 90 o 120 días y pulsa Generar pronóstico. El dashboard permite alternar entre vista diaria y semanal. Las vistas semanales resumen el pronóstico diario dentro del horizonte solicitado.
+5. Para evaluar un pronóstico guardado, importa el historial actualizado (completo, incluidas las fechas nuevas) con el mismo nombre y reglas. En Historial elige la ejecución anterior y revisa Real, Pronóstico, MAE y WAPE para las fechas coincidentes.
 
-Inicio manual desde la carpeta extraída:
-python -m pip install -r requirements.txt
-python -m streamlit run app.py
+Usa fechas AAAA-MM-DD. Ejemplo: Fecha,Tickets. Reúne al menos 14 días de historial con 10 días observados. Los conjuntos, modelos e historial de cada departamento viven en la sesión del navegador. Al recargar o cerrar la sesión puedes perderlos. Descarga los CSV que quieras conservar.
 
-La demo ya muestra un pronóstico de tickets. Para usar tu historial, selecciona Subir archivo, carga un CSV o XLSX y elige fecha, valor, frecuencia y horizonte. Prefiere fechas AAAA-MM-DD y usa una sola serie por archivo u hoja. Para fechas con hora, usa AAAA-MM-DD HH:MM. El historial semanal se agrupa de lunes a domingo. El mensual se etiqueta con el primer día del mes. Incluye períodos cerrados. La suma es apropiada para tickets o unidades; el promedio sirve para mediciones.
-
-En Comparación de modelos, MAE indica cuánto se desvió en promedio cada pronóstico en la validación histórica. RMSE da más peso a los errores grandes. Las predicciones de conteos pueden incluir fracciones porque representan volúmenes esperados.
+Windows: extrae el ZIP antes de abrir Iniciar_Cast.bat. Usa Python 3.11–3.14 con acceso a Internet para instalar dependencias. Mantén la ventana abierta mientras usas Cast.
+Inicio manual desde la carpeta: python -m pip install -r requirements.txt
+Después ejecuta: python -m streamlit run app.py

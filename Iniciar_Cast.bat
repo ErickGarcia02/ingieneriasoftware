@@ -11,13 +11,14 @@ goto deps
 python -m venv .venv
 if errorlevel 1 goto fallo
 :deps
-if exist ".venv\cast-instalado" goto run
+fc /b "requirements.txt" ".venv\cast-requirements.txt" >nul 2>&1
+if not errorlevel 1 goto run
 ".venv\Scripts\python.exe" -m pip install -r requirements.txt
 if errorlevel 1 goto fallo
-type nul > ".venv\cast-instalado"
+copy /y "requirements.txt" ".venv\cast-requirements.txt" >nul
 :run
 ".venv\Scripts\python.exe" -m streamlit run app.py --server.address localhost
 if not errorlevel 1 exit /b 0
 :fallo
-echo Revisa el mensaje anterior. Se requiere Python 3.11 o 3.12 e Internet en el primer inicio.
+echo Revisa el mensaje anterior. Se requiere Python 3.11 a 3.14 e Internet en el primer inicio.
 pause
