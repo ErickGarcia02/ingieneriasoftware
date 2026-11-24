@@ -1,0 +1,11 @@
+Cast | Inicio rápido
+
+Windows: extrae todo el ZIP y haz doble clic en Iniciar_Cast.bat. Usa Python 3.11 o 3.12 y conexión a Internet durante la primera instalación. Mantén la ventana abierta mientras trabajas. Ctrl+C detiene la aplicación. Si el navegador no abre automáticamente, copia la dirección Local URL de la ventana.
+
+Inicio manual desde la carpeta extraída:
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+
+La demo ya muestra un pronóstico de tickets. Para usar tu historial, selecciona Subir archivo, carga un CSV o XLSX y elige fecha, valor, frecuencia y horizonte. Prefiere fechas AAAA-MM-DD y usa una sola serie por archivo u hoja. Para fechas con hora, usa AAAA-MM-DD HH:MM. El historial semanal se agrupa de lunes a domingo. El mensual se etiqueta con el primer día del mes. Incluye períodos cerrados. La suma es apropiada para tickets o unidades; el promedio sirve para mediciones.
+
+En Comparación de modelos, MAE indica cuánto se desvió en promedio cada pronóstico en la validación histórica. RMSE da más peso a los errores grandes. Las predicciones de conteos pueden incluir fracciones porque representan volúmenes esperados.
